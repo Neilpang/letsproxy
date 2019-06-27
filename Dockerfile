@@ -17,6 +17,8 @@ EXPOSE 443
 
 COPY ./* /app/
 
+RUN chmod +x /app/updatessl.sh
+
 RUN mkdir -p /etc/nginx/stream.d && echo "stream { \
 include /etc/nginx/stream.d/*.conf; \
 }" >> /etc/nginx/nginx.conf
