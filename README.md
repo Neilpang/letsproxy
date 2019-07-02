@@ -17,6 +17,9 @@ docker run  \
 -v $(pwd)/proxy/certs:/etc/nginx/certs \
 -v $(pwd)/proxy/acme:/acmecerts \
 -v $(pwd)/proxy/conf.d:/etc/nginx/conf.d \
+-v $(pwd)/vhost.d:/etc/nginx/vhost.d \
+-v $(pwd)/stream.d:/etc/nginx/stream.d \
+-v $(pwd)/dhparam:/etc/nginx/dhparam \
 --name proxy \
 neilpang/nginx-proxy
 ```
@@ -30,6 +33,9 @@ docker run  \
 -v $(pwd)/proxy/certs:/etc/nginx/certs \
 -v $(pwd)/proxy/acme:/acmecerts \
 -v $(pwd)/proxy/conf.d:/etc/nginx/conf.d \
+-v $(pwd)/vhost.d:/etc/nginx/vhost.d \
+-v $(pwd)/stream.d:/etc/nginx/stream.d \
+-v $(pwd)/dhparam:/etc/nginx/dhparam \
 --name proxy \
 --net=host \
 neilpang/nginx-proxy
@@ -47,11 +53,15 @@ services:
     image: neilpang/nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
       volumes:
         - /var/run/docker.sock:/tmp/docker.sock:ro
         - ./proxy/certs:/etc/nginx/certs
         - ./proxy/acme:/acmecerts
         - ./proxy/conf.d:/etc/nginx/conf.d
+        - ./proxy/vhost.d:/etc/nginx/vhost.d \
+	      - ./proxy/stream.d:/etc/nginx/stream.d \
+	      - ./proxy/dhparam:/etc/nginx/dhparam \
       network_mode: "host"
 ```
 
