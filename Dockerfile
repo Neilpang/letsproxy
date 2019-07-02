@@ -1,4 +1,4 @@
-FROM jwilder/nginx-proxy
+FROM neilpang/nginx-proxy-base
 
 RUN apt-get update \
  && apt-get install -y -q --no-install-recommends \
@@ -15,7 +15,9 @@ RUN curl https://get.acme.sh | sh && crontab -l | sed 's#> /dev/null##' | cronta
 VOLUME ["/acmecerts"]
 EXPOSE 443
 
-COPY ./* /app/
+COPY nginx.tmpl /app/
+COPY Procfile /app/
+COPY updatessl.sh /app/
 
 RUN chmod +x /app/updatessl.sh
 
