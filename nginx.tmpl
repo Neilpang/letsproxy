@@ -267,9 +267,12 @@ server {
 	{{ if (exists (printf "/etc/nginx/certs/%s.dhparam.pem" $cert)) }}
 	ssl_dhparam {{ printf "/etc/nginx/certs/%s.dhparam.pem" $cert }};
 	{{ end }}
-
-	{{ if (exists (printf "/etc/nginx/certs/%s.chain.pem" $cert)) }}
+        
 	ssl_stapling on;
+	resolver                 8.8.4.4 8.8.8.8  valid=300s;
+	resolver_timeout         10s;
+	{{ if (exists (printf "/etc/nginx/certs/%s.chain.pem" $cert)) }}
+	
 	ssl_stapling_verify on;
 	ssl_trusted_certificate {{ printf "/etc/nginx/certs/%s.chain.pem" $cert }};
 	{{ end }}
