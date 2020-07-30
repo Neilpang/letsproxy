@@ -1,4 +1,4 @@
-FROM neilpang/nginx-proxy-base
+FROM jwilder/nginx-proxy:latest
 
 RUN apt-get update \
  && apt-get install -y -q --no-install-recommends \

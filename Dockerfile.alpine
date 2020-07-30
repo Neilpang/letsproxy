@@ -1,4 +1,4 @@
-FROM neilpang/nginx-proxy-base:alpine
+FROM jwilder/nginx-proxy:alpine
 
 
 ENV ACME_BUILD_DATE=2019-07-02
