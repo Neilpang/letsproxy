@@ -59,8 +59,8 @@ services:
         - ./proxy/acme:/acmecerts
         - ./proxy/conf.d:/etc/nginx/conf.d
         - ./proxy/vhost.d:/etc/nginx/vhost.d \
-	      - ./proxy/stream.d:/etc/nginx/stream.d \
-	      - ./proxy/dhparam:/etc/nginx/dhparam \
+        - ./proxy/stream.d:/etc/nginx/stream.d \
+        - ./proxy/dhparam:/etc/nginx/dhparam \
       network_mode: "host"
 ```
 
