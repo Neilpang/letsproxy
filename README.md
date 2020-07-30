@@ -1,9 +1,8 @@
-Based on https://github.com/jwilder/nginx-proxy
+Based on https://github.com/nginx-proxy/nginx-proxy
 
 A new env varaible `ENABLE_ACME` is added to use acme.sh to generate free ssl cert from letsencrypt.
 
-All the other options are the same as the upstream project: https://github.com/jwilder/nginx-proxy
-
+All the other options are the same as the upstream project.
 It's very easy to use:
 
 ### 1. Run nginx reverse proxy
