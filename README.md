@@ -20,7 +20,7 @@ docker run  \
 -v $(pwd)/stream.d:/etc/nginx/stream.d \
 -v $(pwd)/dhparam:/etc/nginx/dhparam \
 --name proxy \
-neilpang/nginx-proxy
+neilpang/letsproxy
 ```
 
 It's recommended to run with `--net=host` option, like:
@@ -37,7 +37,7 @@ docker run  \
 -v $(pwd)/dhparam:/etc/nginx/dhparam \
 --name proxy \
 --net=host \
-neilpang/nginx-proxy
+neilpang/letsproxy
 ```
 
 For a docker compose v2 or v3 project, every project has a dedicated network, so, you must use `--net=host` option,  so that it can proxy any projects on you machine.
@@ -48,8 +48,8 @@ For a docker compose v2 or v3 project, every project has a dedicated network, so
 version: '2'
 
 services:
-  nginx-proxy:
-    image: neilpang/nginx-proxy
+  letsproxy:
+    image: neilpang/letsproxy
     ports:
       - "80:80"
       - "443:443"
