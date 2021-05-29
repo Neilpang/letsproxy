@@ -1,23 +1,11 @@
 name: DockerHub
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 1'
   push:
     branches:
-      - main
+      - '*'
     tags:
-      - '*.*.*'
-    paths-ignore:
-      - 'test/*'
-      - '.gitignore'
-      - '.travis.yml'
-      - 'docker-compose-separate-containers.yml'
-      - 'docker-compose.yml'
-      - 'LICENSE'
-      - 'Makefile'
-      - '*.md'
+      - '*'
 
 jobs:
   multiarch-build-debian:
