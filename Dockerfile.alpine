@@ -5,7 +5,7 @@ ENV AUTO_UPGRADE=1
 ENV LE_WORKING_DIR=/acme.sh
 ENV LE_CONFIG_HOME=/acmecerts
 RUN wget -O- https://get.acme.sh | sh && crontab -l | sed 's#> /dev/null##' | crontab - \
-    && $LE_WORKING_DIR/acme.sh/acme.sh --set-default-ca --server letsencrypt
+    && $LE_WORKING_DIR/acme.sh --set-default-ca --server letsencrypt
 
 VOLUME ["/acmecerts"]
 EXPOSE 443
