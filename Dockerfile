@@ -1,4 +1,4 @@
-FROM jwilder/nginx-proxy:latest
+FROM nginxproxy/nginx-proxy:latest
 
 RUN apt-get update \
  && apt-get install -y -q --no-install-recommends \
@@ -18,6 +18,8 @@ EXPOSE 443
 
 COPY nginx.tmpl /app/
 COPY Procfile /app/
+RUN  echo "cron: cron -f" >>/app/Procfile
+
 COPY updatessl.sh /app/
 
 RUN chmod +x /app/updatessl.sh

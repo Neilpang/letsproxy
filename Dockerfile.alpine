@@ -1,4 +1,4 @@
-FROM jwilder/nginx-proxy:alpine
+FROM nginxproxy/nginx-proxy:alpine
 
 
 ENV AUTO_UPGRADE=1
@@ -12,6 +12,7 @@ EXPOSE 443
 
 COPY nginx.tmpl /app/
 COPY Procfile /app/
+RUN  echo "cron: crond -f" >>/app/Procfile
 COPY updatessl.sh /app/
 
 RUN chmod +x /app/updatessl.sh
