@@ -16,7 +16,7 @@ updatessl() {
     for d_list in $(grep ACME_DOMAINS $DEFAULT_CONF | cut -d ' ' -f 2);
     do
       d=$(echo "$d_list" | cut -d , -f 1)
-      $ACME_BIN --issue --ocsp -k ec-256 \
+      $ACME_BIN --issue --server letsencrypt --ocsp -k ec-256 \
       -d $d_list \
       --nginx \
       --fullchain-file "$CERTS/$d.crt" \
