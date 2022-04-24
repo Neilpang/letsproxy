@@ -162,7 +162,9 @@ server {
 	{{ end }}
 	{{ $access_log }}
 	include /etc/nginx/vhost.d/default;
-	return 503;
+        location / {
+            return 503;
+        }
 
 	ssl_session_cache shared:SSL:50m;
 	ssl_session_tickets off;
@@ -403,7 +405,9 @@ server {
 	{{ end }}
 	{{ $access_log }}
 	include /etc/nginx/vhost.d/default;
-	return 500;
+        location / {
+            return 503;
+        }
 
 	ssl_certificate /etc/nginx/certs/default.crt;
 	ssl_certificate_key /etc/nginx/certs/default.key;
