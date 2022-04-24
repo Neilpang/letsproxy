@@ -161,6 +161,7 @@ server {
 	listen [::]:{{ $external_https_port }} ssl http2;
 	{{ end }}
 	{{ $access_log }}
+	include /etc/nginx/vhost.d/default;
 	return 503;
 
 	ssl_session_cache shared:SSL:50m;
@@ -401,6 +402,7 @@ server {
 	listen [::]:{{ $external_https_port }} ssl http2 {{ $default_server }};
 	{{ end }}
 	{{ $access_log }}
+	include /etc/nginx/vhost.d/default;
 	return 500;
 
 	ssl_certificate /etc/nginx/certs/default.crt;
