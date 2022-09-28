@@ -2,7 +2,7 @@ FROM nginxproxy/nginx-proxy:latest
 
 RUN apt-get update \
  && apt-get install -y -q --no-install-recommends \
-    cron curl \
+    cron curl nginx-module-njs \
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
 
@@ -27,6 +27,9 @@ RUN chmod +x /app/updatessl.sh
 RUN mkdir -p /etc/nginx/stream.d && echo "stream { \
 include /etc/nginx/stream.d/*.conf; \
 }" >> /etc/nginx/nginx.conf
+
+RUN  sed -i '1s|^|load_module modules/ngx_http_js_module.so;\n|'  /etc/nginx/nginx.conf \
+  && sed -i '1s|^|load_module modules/ngx_stream_js_module.so;\n|'  /etc/nginx/nginx.conf
 
 VOLUME ["/etc/nginx/stream.d"]
 

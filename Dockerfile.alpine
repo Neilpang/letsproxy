@@ -1,5 +1,6 @@
 FROM nginxproxy/nginx-proxy:alpine
 
+RUN apk add nginx-module-njs
 
 ENV AUTO_UPGRADE=1
 ENV LE_WORKING_DIR=/acme.sh
@@ -20,6 +21,11 @@ RUN chmod +x /app/updatessl.sh
 RUN mkdir -p /etc/nginx/stream.d && echo "stream { \
 include /etc/nginx/stream.d/*.conf; \
 }" >> /etc/nginx/nginx.conf
+
+
+RUN  sed -i '1s|^|load_module modules/ngx_http_js_module.so;\n|'  /etc/nginx/nginx.conf \
+  && sed -i '1s|^|load_module modules/ngx_stream_js_module.so;\n|'  /etc/nginx/nginx.conf
+
 
 VOLUME ["/etc/nginx/stream.d"]
 
