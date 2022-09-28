@@ -31,5 +31,8 @@ include /etc/nginx/stream.d/*.conf; \
 RUN  sed -i '1s|^|load_module modules/ngx_http_js_module.so;\n|'  /etc/nginx/nginx.conf \
   && sed -i '1s|^|load_module modules/ngx_stream_js_module.so;\n|'  /etc/nginx/nginx.conf
 
+RUN mkdir -p /etc/nginx/socks
+
+
 VOLUME ["/etc/nginx/stream.d"]
 

@@ -243,6 +243,9 @@ upstream {{ $upstream_name }} {
 {{/* Get the first cert name defined by containers w/ the same vhost */}}
 {{ $certName := (first (groupByKeys $containers "Env.CERT_NAME")) }}
 
+{{ $enable_socks := (first (groupByKeys $containers "Env.ENABLE_SOCKS")) }}
+
+
 {{/* Get the best matching cert  by name for the vhost. */}}
 {{ $vhostCert := (closest (dir "/etc/nginx/certs") (printf "%s.crt" $host))}}
 
@@ -261,6 +264,10 @@ upstream {{ $upstream_name }} {
 server {
 	server_name {{ $host }};
 	listen {{ $external_http_port }} {{ $default_server }};
+{{ if eq $enable_socks "true" }}
+	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_http_port }}.sock;
+{{ end }}
+
 	{{ if $enable_ipv6 }}
 	listen [::]:{{ $external_http_port }} {{ $default_server }};
 	{{ end }}
@@ -284,6 +291,10 @@ server {
 server {
 	server_name {{ $host }};
 	listen {{ $external_https_port }} ssl http2 {{ $default_server }};
+{{ if eq $enable_socks "true" }}
+	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_https_port }}.sock ssl http2 {{ $default_server }};
+{{ end }}
+
 	{{ if $enable_ipv6 }}
 	listen [::]:{{ $external_https_port }} ssl http2 {{ $default_server }};
 	{{ end }}
@@ -358,6 +369,9 @@ server {
 server {
 	server_name {{ $host }};
 	listen {{ $external_http_port }} {{ $default_server }};
+{{ if eq $enable_socks "true" }}
+	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_http_port }}.sock;
+{{ end }}
 	{{ if $enable_ipv6 }}
 	listen [::]:80 {{ $default_server }};
 	{{ end }}
@@ -403,6 +417,9 @@ server {
 server {
 	server_name {{ $host }};
 	listen {{ $external_https_port }} ssl http2 {{ $default_server }};
+{{ if eq $enable_socks "true" }}
+	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_https_port }}.sock ssl http2 {{ $default_server }};
+{{ end }}
 	{{ if $enable_ipv6 }}
 	listen [::]:{{ $external_https_port }} ssl http2 {{ $default_server }};
 	{{ end }}
