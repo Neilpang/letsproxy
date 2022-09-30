@@ -36,3 +36,11 @@ RUN mkdir -p /etc/nginx/socks
 
 VOLUME ["/etc/nginx/stream.d"]
 
+COPY entry.sh /app/
+RUN chmod +x /app/entry.sh
+
+ENTRYPOINT ["/app/entry.sh"]
+
+CMD ["forego", "start", "-r"]
+
+
