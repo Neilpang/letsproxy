@@ -254,9 +254,11 @@ server {
 server {
 	server_name _; # This is just an invalid value which will never trigger on a real hostname.
 	server_tokens off;
-	listen {{ $external_https_port }} ssl http2;
+	listen {{ $external_https_port }} ssl;
+  http2 on;
 	{{ if $enable_ipv6 }}
-	listen [::]:{{ $external_https_port }} ssl http2;
+	listen [::]:{{ $external_https_port }} ssl;
+  http2 on;
 	{{ end }}
 	{{ $access_log }}
 	include /etc/nginx/vhost.d/default;
@@ -362,12 +364,15 @@ server {
 	{{ if $server_tokens }}
 	server_tokens {{ $server_tokens }};
 	{{ end }}
-	listen {{ $external_https_port }} ssl http2 {{ $default_server }};
+	listen {{ $external_https_port }} ssl {{ $default_server }};
+  http2 on;
 {{ if eq $enable_socks "true" }}
-	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_https_port }}.sock  ssl http2 {{ $default_server }};
+	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_https_port }}.sock  ssl {{ $default_server }};
+  http2 on;
 {{ end }}
 	{{ if $enable_ipv6 }}
-	listen [::]:{{ $external_https_port }} ssl http2 {{ $default_server }};
+	listen [::]:{{ $external_https_port }} ssl {{ $default_server }};
+  http2 on;
 	{{ end }}
 	{{ $access_log }}
 
@@ -488,12 +493,15 @@ server {
 	{{ if $server_tokens }}
 	server_tokens {{ $server_tokens }};
 	{{ end }}
-	listen {{ $external_https_port }} ssl http2 {{ $default_server }};
+	listen {{ $external_https_port }} ssl {{ $default_server }};
+  http2 on;
 {{ if eq $enable_socks "true" }}
-	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_https_port }}.sock  ssl http2 {{ $default_server }};
+	listen unix:/etc/nginx/socks/{{ $host }}.{{ $external_https_port }}.sock  ssl {{ $default_server }};
+  http2 on;
 {{ end }}
 	{{ if $enable_ipv6 }}
-	listen [::]:{{ $external_https_port }} ssl http2 {{ $default_server }};
+	listen [::]:{{ $external_https_port }} ssl {{ $default_server }};
+  http2 on;
 	{{ end }}
 	{{ $access_log }}
 	include /etc/nginx/vhost.d/default;
