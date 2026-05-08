@@ -371,8 +371,8 @@ server {
 	{{ if $enable_ipv6 }}
 	listen [::]:{{ $external_https_port }} ssl {{ $default_server }};
 	{{ end }}
-  http2 on;
-  
+	http2 on;
+
 	{{ $access_log }}
 
 	{{ template "ssl_policy" (dict "ssl_policy" $ssl_policy) }}
