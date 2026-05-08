@@ -258,8 +258,8 @@ server {
 	{{ if $enable_ipv6 }}
 	listen [::]:{{ $external_https_port }} ssl;
 	{{ end }}
-  http2 on;
-  
+	http2 on;
+
 	{{ $access_log }}
 	include /etc/nginx/vhost.d/default;
 	location / {
