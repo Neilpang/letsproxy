@@ -1,6 +1,10 @@
 Based on https://github.com/nginx-proxy/nginx-proxy
 
-A new env varaible `ENABLE_ACME` is added to use acme.sh to generate free ssl cert from letsencrypt.
+A few new env variables are added to use acme.sh to generate free ssl cert from letsencrypt.
+- `ENABLE_ACME` => Set to `true` on other containers to enable certificate generation
+- `ACME_DNS` => Set to `true` on this container to enable DNS-01 challenge
+- `DNS_HOOK` => Set to one of the DNS hook script from the acme.sh script. This also adds the various environment variables used by the hook script specified. ie: `AD_API_KEY` for the dns_ad hook.
+
 
 All the other options are the same as the upstream project.
 It's very easy to use:

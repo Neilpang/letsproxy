@@ -3,6 +3,10 @@
 _SCRIPT_="$0"
 
 ACME_BIN="/acme.sh/acme.sh --home /acme.sh --config-home /acmecerts"
+if test "$ACME_DNS" = 'true' ; then
+  echo "enabling dns mode"
+  ACME_BIN="$ACME_BIN --dns $DNS_HOOK"
+fi
 
 DEFAULT_CONF="/etc/nginx/conf.d/default.conf"
 
